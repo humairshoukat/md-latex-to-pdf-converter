@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert Markdown and LaTeX to a printable PDF entirely in your browser.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Markdown + LaTeX to PDF</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="toolbar app-ui">
+      <div>
+        <h1>Markdown + LaTeX to PDF</h1>
+        <p>Paste, preview, and save. Everything runs in your browser.</p>
+      </div>
+      <button id="pdf" class="primary" disabled>Save PDF</button>
+    </header>
+
+    <section class="prompt-box app-ui" aria-labelledby="prompt-heading">
+      <div class="pane-heading prompt-heading">
+        <h2 id="prompt-heading">Append this prompt to your AI request</h2>
+        <button id="copy-prompt">Copy prompt</button>
+      </div>
+      <textarea id="prompt-text" aria-label="AI formatting prompt" readonly>Return only one Markdown code block containing the complete paper, including any headings and instructions. Use LaTeX inside $...$ for inline maths and $$...$$ for display equations. Use standard LaTeX fractions, roots and matrices, braces for grouped powers, and matching \left...\right brackets. Use numbered Markdown questions; indent display equations within questions by three spaces and leave blank lines around them. Do not use HTML, custom macros or diagrams.</textarea>
+      <span id="copy-status" role="status" aria-live="polite"></span>
+    </section>
+
+    <div class="workspace">
+      <section class="source-pane app-ui" aria-label="Markdown source">
+        <div class="pane-heading"><label for="source">Markdown + LaTeX</label></div>
+        <textarea id="source" spellcheck="false" aria-describedby="status" placeholder="Paste the AI's Markdown + LaTeX response here…"></textarea>
+      </section>
+      <section class="preview-pane" aria-label="Document preview">
+        <div class="pane-heading app-ui"><h2>Preview</h2></div>
+        <div class="preview-canvas">
+          <p id="preview-empty" class="app-ui">Your preview will appear here.</p>
+          <article id="preview" class="paper" aria-label="Rendered document" hidden></article>
+        </div>
+      </section>
+    </div>
+
+    <div class="status-bar app-ui">
+      <span id="status" role="status" aria-live="polite">Paste text to begin.</span>
+      <span>Save PDF opens the print dialog. Choose “Save as PDF”.</span>
+    </div>
+    <div id="error" class="error-box app-ui" role="alert" hidden></div>
+    <noscript><p class="app-ui">Enable JavaScript to render Markdown and LaTeX in your browser.</p></noscript>
+  </main>
+</body>
+</html>
